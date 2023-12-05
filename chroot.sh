@@ -9,10 +9,11 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo blender > /etc/hostname
 
+useradd student -mUG wheel
+
 echo 'root:SecPass
 student:secpass' | chpasswd
 
-useradd student -mUG wheel
 sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
 
 sed -i 's\#Color\Color\g' /etc/pacman.conf
