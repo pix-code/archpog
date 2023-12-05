@@ -12,9 +12,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager sudo base-devel git
 
-arch-chroot /mnt ./chroot.sh
+cp ./chroot.sh /mnt
+cp ./user-chroot.sh /mnt
 
-arch-chroot /mnt /usr/bin/runuser -u student ./user-chroot.sh
+arch-chroot /mnt /chroot.sh
+
+arch-chroot /mnt /usr/bin/runuser -u student /user-chroot.sh
 
 #umount /dev/vda2
 #umount /dev/vda1
