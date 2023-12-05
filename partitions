@@ -1,0 +1,6 @@
+label: gpt
+unit: sectors
+
+1: size=500MiB,type=U,name=efi,bootable
+2: type=L,name=root
+
