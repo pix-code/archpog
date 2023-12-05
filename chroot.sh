@@ -22,7 +22,7 @@ echo 'root:SecPass
 student:secpass' | chpasswd
 
 # add user to sudoers
-sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
+sed -i 's\# %wheel ALL=(ALL:ALL) NOPASSWD: ALL\%wheel ALL=(ALL:ALL) NOPASSWD: ALL\g' /etc/sudoers
 
 # add color to pacman
 sed -i 's\#Color\Color\g' /etc/pacman.conf

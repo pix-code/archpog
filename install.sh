@@ -29,6 +29,10 @@ cp ./user-chroot.sh /mnt
 arch-chroot /mnt /chroot.sh $1
 arch-chroot /mnt /usr/bin/runuser -u student /user-chroot.sh
 
+# return askpass to sudoers
+sed -i 's\%wheel ALL=(ALL:ALL) NOPASSWD: ALL\# %wheel ALL=(ALL:ALL) NOPASSWD: ALL\g' /mnt/etc/sudoers
+sed -i 's\%wheel ALL=(ALL:ALL) ALL\# %wheel ALL=(ALL:ALL) ALL\g' /mnt/etc/sudoers
+
 # remove chroot scripts
 rm /mnt/chroot.sh
 rm /mnt/user-chroot.sh
