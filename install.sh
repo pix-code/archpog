@@ -1,6 +1,10 @@
 #/usr/bin/env bash
 
-cat partitions | sfdisk /dev/vda
+echo "label: gpt
+unit: sectors
+
+1: size=500MiB,type=U,name=efi,bootable
+2: type=L,name=root" | sfdisk /dev/vda
 
 mkfs.ext4 /dev/vda2
 mkfs.fat -F 32 /dev/vda1
