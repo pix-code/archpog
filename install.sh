@@ -14,5 +14,8 @@ pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager sudo bas
 
 arch-chroot /mnt ./chroot.sh
 
-arch-chroot -u student /mnt ./user-chroot.sh
+arch-chroot /mnt /usr/bin/runuser -u student ./user-chroot.sh
+
+#umount /dev/vda2
+#umount /dev/vda1
 

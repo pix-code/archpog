@@ -11,7 +11,8 @@ echo blender > /etc/hostname
 
 echo SecPass | passwd --stdin
 
-useradd student -mUG wheel -p secpass
+useradd student -mUG wheel
+sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
 
 sed -i 's\#Color\Color\g' /etc/pacman.conf
 sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 5\g' /etc/pacman.conf
@@ -26,3 +27,6 @@ options root=$(blkid -o export /dev/vda2 | grep PARTUUID) rw" > /boot/loader/ent
 
 echo "default arch.conf
 timeout 0" > /boot/loader/loader.conf
+
+sudo systemctl enable NetworkManager
+
