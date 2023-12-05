@@ -9,13 +9,14 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo blender > /etc/hostname
 
-echo SecPass | passwd --stdin
+echo 'root:SecPass' | chpasswd
+echo 'user:secpass' | chpasswd
 
 useradd student -mUG wheel
 sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
 
 sed -i 's\#Color\Color\g' /etc/pacman.conf
-sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 5\g' /etc/pacman.conf
+#sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 5\g' /etc/pacman.conf
 
 bootctl install
 
