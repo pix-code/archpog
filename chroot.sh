@@ -10,13 +10,14 @@ echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo blender > /etc/hostname
 
 echo 'root:SecPass' | chpasswd
-echo 'user:secpass' | chpasswd
+echo 'student:secpass' | chpasswd
 
 useradd student -mUG wheel
 sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
 
 sed -i 's\#Color\Color\g' /etc/pacman.conf
 #sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 5\g' /etc/pacman.conf
+sed -i 's\#BottomUp\BottomUp\g' /etc/paru.conf
 
 bootctl install
 
@@ -29,5 +30,12 @@ options root=$(blkid -o export /dev/vda2 | grep PARTUUID) rw" > /boot/loader/ent
 echo "default arch.conf
 timeout 0" > /boot/loader/loader.conf
 
+mkdir /etc/systemd/system/getty@tty1.service.d/
+echo "[Service]
+Type=simple
+ExecStart=
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin pix %I \$TERM" > /etc/systemd/system/getty@tty1.service.d/autologin.conf
+
 sudo systemctl enable NetworkManager
+sudo systemctl enable firewalld
 

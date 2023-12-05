@@ -10,7 +10,7 @@ mount /dev/vda1 /mnt/boot --mkdir
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager sudo base-devel git
+pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git
 
 cp ./chroot.sh /mnt
 cp ./user-chroot.sh /mnt
