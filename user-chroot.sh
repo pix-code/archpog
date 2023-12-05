@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
 cd
+
+echo "#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi" > .bash_profile
+
 git clone https://aur.archlinux.org/paru-bin
 cd paru-bin
 makepkg -si
