@@ -19,7 +19,7 @@ mount /dev/"$1"1 /mnt/boot --mkdir
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # allow parrallel downloads
-sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
+#sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
 
 # install system
 pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git
