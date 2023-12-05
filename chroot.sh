@@ -9,8 +9,8 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo blender > /etc/hostname
 
-echo 'root:SecPass' | chpasswd
-echo 'student:secpass' | chpasswd
+echo 'root:SecPass
+student:secpass' | chpasswd
 
 useradd student -mUG wheel
 sed -i 's\# %wheel ALL=(ALL:ALL) ALL\%wheel ALL=(ALL:ALL) ALL\g' /etc/sudoers
@@ -34,7 +34,7 @@ mkdir /etc/systemd/system/getty@tty1.service.d/
 echo "[Service]
 Type=simple
 ExecStart=
-ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin pix %I \$TERM" > /etc/systemd/system/getty@tty1.service.d/autologin.conf
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin student %I \$TERM" > /etc/systemd/system/getty@tty1.service.d/autologin.conf
 
 sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
