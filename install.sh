@@ -20,8 +20,10 @@ cp ./chroot.sh /mnt
 cp ./user-chroot.sh /mnt
 
 arch-chroot /mnt /chroot.sh $1
-
 arch-chroot /mnt /usr/bin/runuser -u student /user-chroot.sh
+
+rm /mnt/chroot.sh
+rm /mnt/user-chroot.sh
 
 umount /dev/"$1"1
 umount /dev/"$1"2
