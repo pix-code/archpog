@@ -18,24 +18,21 @@ mount /dev/"$1"1 /mnt/boot --mkdir
 # generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# allow parrallel downloads
+sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
+
 # install system
 pacstrap -K /mnt base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git
 
 # move chroot scripts to new system
 cp ./chroot.sh /mnt
 cp ./user-chroot.sh /mnt
+cp ./final-chroot.sh /mnt
 
 # chroot into system, first as root then as user
 arch-chroot /mnt /chroot.sh $1
 arch-chroot /mnt /usr/bin/runuser -u student /user-chroot.sh
-
-# return askpass to sudoers
-sed -i 's\%wheel ALL=(ALL:ALL) NOPASSWD: ALL\# %wheel ALL=(ALL:ALL) NOPASSWD: ALL\g' /mnt/etc/sudoers
-sed -i 's\%wheel ALL=(ALL:ALL) ALL\# %wheel ALL=(ALL:ALL) ALL\g' /mnt/etc/sudoers
-
-# remove chroot scripts
-rm /mnt/chroot.sh
-rm /mnt/user-chroot.sh
+arch-chroot /mnt /final-chroot.sh
 
 # unmount drives
 umount /dev/"$1"1

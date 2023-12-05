@@ -27,7 +27,7 @@ sed -i 's\# %wheel ALL=(ALL:ALL) NOPASSWD: ALL\%wheel ALL=(ALL:ALL) NOPASSWD: AL
 # add color to pacman
 sed -i 's\#Color\Color\g' /etc/pacman.conf
 # optionally allow parallel downloads
-#sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 5\g' /etc/pacman.conf
+sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
 
 # set bottomup for paru
 sed -i 's\#BottomUp\BottomUp\g' /etc/paru.conf
