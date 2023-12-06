@@ -12,27 +12,27 @@ mkfs.ext4 /dev/"$1"2 &&
 mkfs.fat -F 32 /dev/"$1"1 &&
 
 # mount filesystems
-mount /dev/"$1"2 /mnt/$1 &&
-mount /dev/"$1"1 /mnt/$1/boot --mkdir &&
+mount /dev/"$1"2 /mnt/ &&
+mount /dev/"$1"1 /mnt/boot --mkdir &&
 
 # allow parrallel downloads
 #sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
 
 # install system
-pacstrap -K /mnt/$1 base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git &&
+pacstrap -K /mnt/ base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git &&
 
 # generate fstab
-genfstab -U /mnt/$1 >> /mnt/$1/etc/fstab &&
+genfstab -U /mnt/ >> /mnt/etc/fstab &&
 
 # move chroot scripts to new system
-cp ./chroot.sh /mnt/$1 &&
-cp ./user-chroot.sh /mnt/$1 &&
-cp ./final-chroot.sh /mnt/$1 &&
+cp ./chroot.sh /mnt/ &&
+cp ./user-chroot.sh /mnt/ &&
+cp ./final-chroot.sh /mnt/ &&
 
 # chroot into system, first as root then as user
-arch-chroot /mnt/$1 /chroot.sh $1 &&
-arch-chroot /mnt/$1 /usr/bin/runuser -u student /user-chroot.sh &&
-arch-chroot /mnt/$1 /final-chroot.sh &&
+arch-chroot /mnt/ /chroot.sh $1 &&
+arch-chroot /mnt/ /usr/bin/runuser -u student /user-chroot.sh &&
+arch-chroot /mnt/ /final-chroot.sh &&
 
 # unmount drives
 umount /dev/"$1"1 &&
