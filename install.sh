@@ -36,5 +36,5 @@ arch-chroot /mnt/$1 /final-chroot.sh &&
 
 # unmount drives
 umount /dev/"$1"1 &&
-umount /dev/"$1"2 &&
+umount /dev/"$1"2
 
