@@ -38,7 +38,6 @@ bootctl install
 # add boot entry
 echo "title   archlinux
 linux   /vmlinuz-linux
-initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
 options root=$(blkid -o export /dev/"$1"2 | grep PARTUUID) rw" > /boot/loader/entries/arch.conf
 
