@@ -15,14 +15,14 @@ mkfs.fat -F 32 /dev/"$1"1
 mount /dev/"$1"2 /mnt/$1
 mount /dev/"$1"1 /mnt/$1/boot --mkdir
 
-# generate fstab
-genfstab -U /mnt/$1 >> /mnt/$1/etc/fstab
-
 # allow parrallel downloads
 #sed -i 's\#ParallelDownloads = 5\ParallelDownloads = 3\g' /etc/pacman.conf
 
 # install system
 pacstrap -K /mnt/$1 base linux linux-firmware linux-headers networkmanager firewalld sudo base-devel git
+
+# generate fstab
+genfstab -U /mnt/$1 >> /mnt/$1/etc/fstab
 
 # move chroot scripts to new system
 cp ./chroot.sh /mnt/$1
