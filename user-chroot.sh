@@ -13,6 +13,8 @@ paru -S pipewire xorg-server xorg-xinit plasma konsole blender fish micro networ
 # remove unneeded stuff (very innefficent but im lazy)
 paru -Rns discover flatpak-kcm breeze-plymouth oxygen plasma-vault plasma-welcome plasma-workspace-wallpapers plymouth-kcm sddm-kcm --noconfirm
 
+mkdir ~/Desktop/
+
 echo "[Desktop Entry]
 Comment[en_US]=
 Comment=
